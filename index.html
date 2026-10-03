@@ -21,6 +21,104 @@ body{
     padding:30px 15px;
 }
 
+/* =========================
+   TELA DE LOGIN
+========================= */
+
+#loginScreen{
+    min-height:calc(100vh - 60px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.login-box{
+    width:100%;
+    max-width:400px;
+    background:linear-gradient(145deg,#3B1766,#211332);
+    border:1px solid #7B35C9;
+    border-radius:24px;
+    padding:40px 30px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+}
+
+.login-icon{
+    width:70px;
+    height:70px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#4B207A;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    border:1px solid #8C4BD1;
+}
+
+.login-box h1{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.login-box p{
+    color:#C8B8D8;
+    font-size:14px;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+.password-input{
+    width:100%;
+    padding:16px;
+    border-radius:12px;
+    border:1px solid #62407E;
+    background:#171022;
+    color:#fff;
+    font-size:18px;
+    text-align:center;
+    outline:none;
+    letter-spacing:5px;
+}
+
+.password-input:focus{
+    border-color:#A45DE5;
+    box-shadow:0 0 0 3px rgba(164,93,229,.12);
+}
+
+.login-button{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(135deg,#7B35C9,#A45DE5);
+    color:#fff;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.login-button:hover{
+    transform:translateY(-1px);
+}
+
+.error{
+    color:#ff7777;
+    font-size:13px;
+    margin-top:15px;
+    display:none;
+}
+
+/* =========================
+   RELATÓRIO
+========================= */
+
+#report{
+    display:none;
+}
+
 .container{
     width:100%;
     max-width:1100px;
@@ -54,6 +152,7 @@ body{
 .header p{
     color:#C8B8D8;
     font-size:15px;
+    line-height:1.6;
 }
 
 .header strong{
@@ -274,6 +373,14 @@ body{
         padding:20px 12px;
     }
 
+    #loginScreen{
+        min-height:calc(100vh - 40px);
+    }
+
+    .login-box{
+        padding:35px 22px;
+    }
+
     .cards{
         grid-template-columns:1fr 1fr;
         gap:10px;
@@ -328,6 +435,54 @@ body{
 
 <body>
 
+<!-- =========================
+     TELA DE SENHA
+========================= -->
+
+<div id="loginScreen">
+
+    <div class="login-box">
+
+        <div class="login-icon">
+            🔒
+        </div>
+
+        <h1>Acesso restrito</h1>
+
+        <p>
+            Digite a senha para acessar<br>
+            o Relatório de Visualizações.
+        </p>
+
+        <input
+            type="password"
+            id="passwordInput"
+            class="password-input"
+            placeholder="••••"
+            inputmode="numeric"
+            maxlength="4"
+            autocomplete="off"
+        >
+
+        <button class="login-button" onclick="login()">
+            ENTRAR
+        </button>
+
+        <div id="errorMessage" class="error">
+            Senha incorreta. Tente novamente.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     RELATÓRIO
+========================= -->
+
+<div id="report">
+
 <div class="container">
 
     <!-- CABEÇALHO -->
@@ -342,7 +497,7 @@ body{
 
         <p>
             Período analisado:
-            <strong>10/09/2026 a 03/10/2026</strong>
+            <strong>10/09/2026 a 03/10/2026</strong><br>
             <strong>Operador: Magre = Cod:13****902</strong>
         </p>
 
@@ -438,13 +593,11 @@ body{
                         </div>
                     </div>
 
-
                     <div class="bar-area">
                         <div class="bar" style="height:34%;">
                             <div class="bar-value">10,1 mi</div>
                         </div>
                     </div>
-
 
                     <div class="bar-area">
                         <div class="bar" style="height:48%;">
@@ -452,13 +605,11 @@ body{
                         </div>
                     </div>
 
-
                     <div class="bar-area">
                         <div class="bar" style="height:62%;">
                             <div class="bar-value">18,7 mi</div>
                         </div>
                     </div>
-
 
                     <div class="bar-area">
                         <div class="bar" style="height:77%;">
@@ -466,13 +617,11 @@ body{
                         </div>
                     </div>
 
-
                     <div class="bar-area">
                         <div class="bar" style="height:91%;">
                             <div class="bar-value">27,4 mi</div>
                         </div>
                     </div>
-
 
                     <div class="bar-area">
                         <div class="bar" style="height:100%;">
@@ -508,11 +657,55 @@ body{
 
         <strong>Relatório de Visualizações</strong><br>
 
-        Operador, Magre = cod:13*****902. Ferramenta exclusiva, para análise de desenpenho do site.
+        Operador, Magre = cod:13*****902.
+        Ferramenta exclusiva, para análise de desempenho do site.
 
     </div>
 
 </div>
+
+</div>
+
+
+<!-- =========================
+     SENHA
+========================= -->
+
+<script>
+
+function login(){
+
+    const senha = document.getElementById("passwordInput").value;
+    const erro = document.getElementById("errorMessage");
+
+    if(senha === "1533"){
+
+        document.getElementById("loginScreen").style.display = "none";
+        document.getElementById("report").style.display = "block";
+
+    }else{
+
+        erro.style.display = "block";
+
+        document.getElementById("passwordInput").value = "";
+
+        document.getElementById("passwordInput").focus();
+
+    }
+}
+
+
+/* Permite apertar ENTER */
+
+document.getElementById("passwordInput").addEventListener("keydown", function(event){
+
+    if(event.key === "Enter"){
+        login();
+    }
+
+});
+
+</script>
 
 </body>
 </html>
